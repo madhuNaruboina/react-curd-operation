@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import EmployeeService from '../Services/EmployeeService'
+// import { faHome } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 class ListEmployee extends Component {
-    constructor(props) {
+    constructor(props) { 
         super(props)
 
         this.state = {
@@ -28,6 +31,7 @@ class ListEmployee extends Component {
     componentDidMount(){
         EmployeeService.getEmployees().then((res) => {
             this.setState({ employees: res.data});
+           
         });
     }
 
@@ -38,7 +42,7 @@ class ListEmployee extends Component {
     render() {
         return (
             <div>
-                 <h2 className="text-center">Employees List</h2>
+                 <h2 className="text-center">Welcome to Employee Portal</h2>
                  <div className = "row">
                     <button className="btn btn-danger" onClick={this.addEmployee}> Add Employee</button>
                  </div>
@@ -57,17 +61,20 @@ class ListEmployee extends Component {
                             <tbody>
                                 {
                                     this.state.employees.map(
-                                        employee => 
+                                        (employee) => 
+                                      
                                         <tr key = {employee.id}>
-                                             <td> { employee.firstName} </td>   
-                                             <td> {employee.lastName}</td>
-                                             <td> {employee.emailId}</td>
+                                             <td> { employee.firstname} </td>   
+                                             <td> {employee.lastname}</td>
+                                             <td> {employee.emialId}</td>
                                              <td>
                                                  <button onClick={ () => this.editEmployee(employee.id)} className="btn btn-info">Update </button>
                                                  <button style={{marginLeft: "10px"}} onClick={ () => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button>
                                                  <button style={{marginLeft: "10px"}} onClick={ () => this.viewEmployee(employee.id)} className="btn btn-info">View </button>
+                                                  
                                              </td>
                                         </tr>
+                                        
                                     )
                                 }
                             </tbody>
